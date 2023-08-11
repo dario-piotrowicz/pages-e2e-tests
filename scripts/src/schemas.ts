@@ -1,6 +1,4 @@
-import { join } from "path";
 import { z } from "zod";
-import { FEATURES_PATH } from "./config";
 
 const date = z.string().regex(/^\d{4}-[01]\d-[0123]\d$/);
 
@@ -179,12 +177,6 @@ export const fixturesSchema = z
 		features: z
 			.array(z.string().nonempty())
 			.default([])
-			.transform((features) =>
-				features.map((feature) => ({
-					name: feature,
-					path: join(FEATURES_PATH, feature),
-				}))
-			)
 			.describe("The features to apply to this fixture project."),
 		setup: z.optional(
 			z
